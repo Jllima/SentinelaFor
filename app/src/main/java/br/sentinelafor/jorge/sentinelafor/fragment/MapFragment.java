@@ -28,7 +28,7 @@ import br.sentinelafor.jorge.sentinelafor.R;
 public class MapFragment extends Fragment {
 
     MapView mMapView;
-    private GoogleMap googleMap;
+    private GoogleMap mMap;
 
     public MapFragment() {
         // Required empty public constructor
@@ -59,17 +59,21 @@ public class MapFragment extends Fragment {
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap mMap) {
-                googleMap = mMap;
-
-                // Add a marker in Sydney and move the camera
-                LatLng sydney = new LatLng(-34, 151);
-                mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            public void onMapReady(GoogleMap googleMap) {
+                onMyMapReady(googleMap);
             }
         });
 
         return rootView;
+    }
+
+    public void onMyMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     @Override
